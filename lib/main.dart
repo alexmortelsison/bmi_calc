@@ -9,9 +9,15 @@ class BMI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: InputPage(),
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.orangeAccent,
+        ),
+      ),
+      home: const InputPage(),
     );
   }
 }
