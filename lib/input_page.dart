@@ -15,6 +15,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
+  int height = 180;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -66,19 +68,49 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               onPress: () {},
-              colour: kInactiveCardColour,
-              cardChild: const Column(
+              colour: kActiveCardColour,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       "HEIGHT",
                       style: kLabelTextStyle,
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text("180", style: kNumberTextStyle),
+                      Text(height.toString(), style: kNumberTextStyle),
+                      const Text(
+                        "cm",
+                        style: kLabelTextStyle,
+                      )
                     ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      inactiveTrackColor: const Color(0xFF8D8E98),
+                      activeTrackColor: Colors.white,
+                      thumbColor: const Color(0xFFEB1555),
+                      overlayColor: const Color(0x29EB1555),
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          const RoundSliderOverlayShape(overlayRadius: 30.0),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120,
+                      max: 220,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
                   )
                 ],
               ),
@@ -90,14 +122,50 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {},
-                    colour: kInactiveCardColour,
-                    cardChild: const Column(),
+                    colour: kActiveCardColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "WEIGHT",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: const Color(0xFF4C4F5E),
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: const Color(0xFF4C4F5E),
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     onPress: () {},
-                    colour: kInactiveCardColour,
+                    colour: kActiveCardColour,
                     cardChild: const Column(),
                   ),
                 ),
